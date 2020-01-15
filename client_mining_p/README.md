@@ -7,7 +7,7 @@ Furthermore, the amount of work needed to actually mine a block is a bit low.  W
 
 # Task List
 
-*Server*
+## *Server*
 Modify the server we created to:
 * Remove the `proof_of_work` function from the server.
 * Change `valid_proof` to require *6* leading zeroes.
