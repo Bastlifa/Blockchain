@@ -143,6 +143,13 @@ def mine():
 
     return jsonify(response), 200
 
+@app.route('/last_block', methods=['GET'])
+def lb():
+    response = {
+        'last_block': blockchain.last_block
+    }
+
+    return jsonify(response), 200
 
 @app.route('/chain', methods=['GET'])
 def full_chain():
