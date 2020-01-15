@@ -14,13 +14,16 @@ def proof_of_work(block):
     in an effort to find a number that is a valid proof
     :return: A valid proof for the provided block
     """
-    
+    start_time = time.time()
 
     block_string = json.dumps(block, sort_keys=True)
     proof = 0
     while not valid_proof(block_string, proof):
         proof += 1
     print('proof', proof)
+
+    end_time = time.time()
+    print(f'runtime: {end_time - start_time} seconds.')
     return proof
 
 
@@ -38,7 +41,7 @@ def valid_proof(block_string, proof):
     guess = f"{block_string}{proof}".encode()
     guess_hash = hashlib.sha256(guess).hexdigest()
 
-    return guess_hash[:3] == "000"
+    return guess_hash[:6] == "0"*6
 
 if __name__ == '__main__':
     # What is the server address? IE `python3 miner.py https://server.com/api/`

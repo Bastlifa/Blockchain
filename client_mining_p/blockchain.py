@@ -121,7 +121,7 @@ class Blockchain(object):
         guess = f"{block_string}{proof}".encode()
         guess_hash = hashlib.sha256(guess).hexdigest()
         
-        return guess_hash[:3] == "000"
+        return guess_hash[:6] == "0"*6
 
 # Instantiate our Node
 app = Flask(__name__)
@@ -143,7 +143,9 @@ def mine():
 
     proof = data['proof']
     print('proof', proof)
+
     block_string = json.dumps(blockchain.last_block, sort_keys=True)
+
     if not blockchain.valid_proof(block_string, proof):
         response = {'message': 'Proof is invalid'}
         return jsonify(response), 401
