@@ -142,7 +142,6 @@ def mine():
         return jsonify(response), 400
 
     proof = data['proof']
-    print('proof', proof)
 
     block_string = json.dumps(blockchain.last_block, sort_keys=True)
 
@@ -164,6 +163,10 @@ def lb():
     response = {
         'last_block': blockchain.last_block
     }
+
+    # testing erraneous responses from server
+    # response = 'a'
+    # return response, 200
 
     return jsonify(response), 200
 
