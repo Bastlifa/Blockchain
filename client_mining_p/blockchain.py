@@ -9,6 +9,7 @@ from uuid import uuid4
 from flask import Flask, jsonify, request
 
 
+
 class Blockchain(object):
     def __init__(self):
         self.chain = []
@@ -137,6 +138,7 @@ blockchain = Blockchain()
 def mine():
 
     data = request.get_json()
+    
     if not data['proof'] or not data['id']:
         response = {'message': 'Error, missing proof or id'}
         return jsonify(response), 400

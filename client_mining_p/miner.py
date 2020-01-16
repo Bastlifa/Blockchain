@@ -6,6 +6,8 @@ import json
 
 import time
 
+n=5
+
 def proof_of_work(block):
     """
     Simple Proof of Work Algorithm
@@ -40,7 +42,7 @@ def valid_proof(block_string, proof):
     guess = f"{block_string}{proof}".encode()
     guess_hash = hashlib.sha256(guess).hexdigest()
 
-    return guess_hash[:6] == "0"*6
+    return guess_hash[:n] == "0"*n
 
 if __name__ == '__main__':
     # What is the server address? IE `python3 miner.py https://server.com/api/`
@@ -64,11 +66,12 @@ if __name__ == '__main__':
         try:
             data = r.json()
 
+            # q=1
+            # breakpoint()
             new_proof = proof_of_work(data['last_block'])
-
             # When found, POST it to the server {"proof": new_proof, "id": id}
             post_data = {"proof": new_proof, "id": id}
-
+            print('post_data: ', post_data)
             r = requests.post(url=node + "/mine", json=post_data)
             data = r.json()
 
