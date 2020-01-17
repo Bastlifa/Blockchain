@@ -2,7 +2,9 @@ import React from "react"
 import {useSelector, useDispatch} from "react-redux"
 import {setUser} from "../store/actions"
 import UserName from "./UserName"
+import Recipient from './Recipient'
 import UserTransactions from "./UserTransactions"
+import { PageContainer, UserAndRecipient } from "./Styles"
 
 const User = _ =>
 {
@@ -11,8 +13,13 @@ const User = _ =>
 
     return (
         <>
-            <UserName />
-            <UserTransactions/>
+            <PageContainer>
+                <UserAndRecipient>
+                    <UserName />
+                    <Recipient />
+                </UserAndRecipient>    
+                <UserTransactions/>
+            </PageContainer>
         </>
     )
 }

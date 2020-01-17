@@ -3,6 +3,9 @@ import {
     GET_CHAIN_SUCCESS,
     GET_CHAIN_FAIL,
     SET_USER,
+    POST_TRANSACTION_START,
+    POST_TRANSACTION_SUCCESS,
+    POST_TRANSACTION_FAIL,
 } from './actions'
 
 
@@ -41,6 +44,24 @@ export const reducer = (state = initialState, action) =>
             return {
                 ...state,
                 userName: action.payload
+            }
+        case POST_TRANSACTION_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: "",
+            }
+        case POST_TRANSACTION_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: "",
+            }
+        case POST_TRANSACTION_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload,
             }
         default:
             return state

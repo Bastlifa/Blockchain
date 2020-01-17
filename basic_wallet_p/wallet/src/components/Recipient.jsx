@@ -1,47 +1,62 @@
 import React, {useState, useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
-// import {setUser} from "../store/actions"
+import {postTransaction} from "../store/actions"
 
 const Recipient = _ =>
 {
     const dispatch = useDispatch()
     const state = useSelector(state => state)
 
-    const [recipientrName, setRecipientName] = useState("")
+    const [recipient, setRecipient] = useState("")
+    const [amount, setAmount] = useState(0)
 
     const handleChange = e =>
     {
-        setUserName(e.target.value)
+        setRecipient(e.target.value)
     }
 
-    const handleEnter = e =>
+    const handleAmount = e =>
     {
-        if(e.key === 'Enter') 
-        {
-            console.log('c')
-            handleSubmit(e)
-        }
+        setAmount(e.target.value)
     }
+    // const handleEnter = e =>
+    // {
+    //     if(e.key === 'Enter') 
+    //     {
+    //         handleSubmit(e)
+    //     }
+    // }
 
     const handleSubmit = e =>
     {
-        console.log('b')
         e.preventDefault()
+        dispatch(postTransaction({recipient: recipient, amount: amount, sender: state.userName}))
+        setRecipient("")
+        setAmount(0)
     }
 
     return (
         <>
             <div className="box">
-                <label className="label">Recipient Name</label>
-                <div className="field has-addons">    
+                <label className="label">{"Recipient"}</label>
+                <div className="field">    
                     <div className="control">
                         <input 
                             type="text" 
                             className="input" 
                             placeholder="Set your recipient's name" 
-                            value={recipientName} 
-                            onKeyPress={handleEnter}
+                            value={recipient} 
+                            // onKeyPress={handleEnter}
                             onChange={handleChange}/>
+                    </div>
+                    <div className="control">
+                        <input 
+                            type="number" 
+                            className="input" 
+                            placeholder="Set the amount" 
+                            value={amount} 
+                            // onKeyPress={handleEnter}
+                            onChange={handleAmount}/>
                     </div>
                     <div className="control">
                         <button className="button is-info" onClick={handleSubmit}>Submit</button>
@@ -54,4 +69,4 @@ const Recipient = _ =>
     )
 }
 
-export default UserName
+export default Recipient

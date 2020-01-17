@@ -6,7 +6,7 @@ import json
 
 import time
 
-n=5
+n=6
 
 def proof_of_work(block):
     """
